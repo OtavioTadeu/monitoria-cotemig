@@ -15,6 +15,15 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            // Adicionando as cores do COTEMIG
+            colors: {
+                cotemig: {
+                    roxo: '#5b2b82',   // Um roxo profundo característico
+                    verde: '#8cc63f',  // Um verde vibrante (tipo "tijolo" de código)
+                    escuro: '#1a1a1a', // Preto suave para fundo
+                    cinza: '#2d2d2d',  // Cinza para cartões
+                }
+            }
         },
     },
 
