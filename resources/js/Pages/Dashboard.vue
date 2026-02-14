@@ -6,6 +6,16 @@ const form = useForm({
     lab: '',
 });
 
+// Lista de Laboratórios com configurações personalizadas
+const laboratorios = [
+    { nome: 'Laboratório 1', cor: 'bg-indigo-600 hover:bg-indigo-700' },
+    { nome: 'Laboratório 2', cor: 'bg-indigo-600 hover:bg-indigo-700' },
+    { nome: 'Laboratório 3', cor: 'bg-indigo-600 hover:bg-indigo-700' },
+    { nome: 'Laboratório 4', cor: 'bg-indigo-600 hover:bg-indigo-700' },
+    { nome: 'Laboratório de Redes (RAC)', cor: 'bg-orange-600 hover:bg-orange-700' }, // RAC (Laranja)
+    { nome: 'Laboratório Apple (MAC)', cor: 'bg-slate-800 hover:bg-slate-900' },     // MAC (Escuro)
+];
+
 const atualizarLocal = (nomeLaboratorio) => {
     form.lab = nomeLaboratorio;
     form.post(route('monitor.update'), {
@@ -32,20 +42,24 @@ const atualizarLocal = (nomeLaboratorio) => {
                         
                         <h3 class="text-lg font-bold mb-6">Onde você está atendendo agora?</h3>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto">
-                            <button v-for="i in 4" :key="i"
-                                @click="atualizarLocal('Laboratório ' + i)"
-                                class="p-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow transition transform hover:scale-105"
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                            
+                            <button 
+                                v-for="lab in laboratorios" 
+                                :key="lab.nome"
+                                @click="atualizarLocal(lab.nome)"
+                                :class="[lab.cor, 'p-4 text-white font-bold rounded-lg shadow transition transform hover:scale-105']"
                                 :disabled="form.processing"
                             >
-                                🖥️ Laboratório {{ i }}
+                                🖥️ {{ lab.nome }}
                             </button>
+
                         </div>
 
                         <div class="mt-8 border-t pt-6 border-gray-200 dark:border-gray-700">
                             <button 
                                 @click="atualizarLocal(null)"
-                                class="text-red-500 hover:text-red-700 font-medium underline transition"
+                                class="px-6 py-2 border border-red-500 text-red-500 rounded hover:bg-red-50 transition"
                             >
                                 ❌ Não estou em laboratório (Sair)
                             </button>
